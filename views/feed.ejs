@@ -1,10 +1,18 @@
+<!-- partials are code snippets that can be reused on multiple pages -->
 <%- include('partials/header') -%>
   <div class="container">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
+        <!-- looping through each Posts that is in the DB, -->
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
+            <!-- each loop it creates a anchor tag, each tag it drops a image for each current post, grab image and show image on page -->
+            <!-- _id is grabbing the unique id of the image that is clicked and passing to server so that it knows which image to render for that particular post -->
+          <!-- app.listen in server.js
+            go to post routes because our path starts with /posts
+            postRoutes is located as a variable at top, because in order to refernece it we have ot require that location
+          -->
+            <a href="/post/<%= posts[i]._id%>">   
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
           </li>

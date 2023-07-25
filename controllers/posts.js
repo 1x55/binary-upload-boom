@@ -4,7 +4,10 @@ const Post = require("../models/Post");
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      //find all post asscoiated to that user ID
+      //Post (not CRUD method) but Mongoose name of a model which contains a schema and is referenced from our models folder
       const posts = await Post.find({ user: req.user.id });
+      //rendering profile.ejs with the data from db
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -20,7 +23,9 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      //find a specific post by its unique ID (passed from the view), POST is referencing model. (look to a path)
       const post = await Post.findById(req.params.id);
+      //remder another view, taking data from db, then passing those elements grabbed and sending it with the view (so it can use it)
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
@@ -31,6 +36,7 @@ module.exports = {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
 
+      //creates a new post in db (using post model which ref. schema to add a new doc. to our db)
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
@@ -40,6 +46,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
+      //once post is created, we redirect to our profile route
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
