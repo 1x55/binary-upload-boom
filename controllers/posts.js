@@ -36,8 +36,10 @@ module.exports = {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
 
-      //creates a new post in db (using post model which ref. schema to add a new doc. to our db)
+      //creates a new post in db (using Mongoose Post model which ref. schema to add a new doc. to our db)
       await Post.create({
+        //specify each component we pass to the model. Telling our construction worker what materials they have to work with.
+        //  getting info. form 4 different sources: form, cloudinary, manual input (like) and passport. All combined togeter to build a single doc. Pass to model
         title: req.body.title,
         image: result.secure_url,
         cloudinaryId: result.public_id,
