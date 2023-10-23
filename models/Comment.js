@@ -8,6 +8,7 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
 
+  //update
   //cloundinary url
   image: {
     type: String,
