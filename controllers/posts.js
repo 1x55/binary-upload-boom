@@ -25,7 +25,7 @@ module.exports = {
     try {
       //find a specific post by its unique ID (passed in from the view), POST is referencing model. (look to a path)
       const post = await Post.findById(req.params.id);
-      //render another view, taking data from db, then passing certain elements grabbed and sending it with the view (so it can use it)
+      //render another view, taking data from db, then passing those elements grabbed and sending it with the view (so it can use it)
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
