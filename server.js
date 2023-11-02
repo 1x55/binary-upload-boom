@@ -2,10 +2,15 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
+//keeps you logged in even, 
 const session = require("express-session");
+//session is argument 
 const MongoStore = require("connect-mongo")(session);
+//The method-override middleware is used to override HTTP verbs. This is particularly useful when there are HTTP clients (like some web browsers or proxies) that don’t support certain HTTP verbs such as PUT or DELETE. By using method-override, you can use POST requests to simulate PUT, DELETE, and other HTTP requests. This is done by including a special parameter in the POST request to indicate the real HTTP method you want to use1. 
 const methodOverride = require("method-override");
+//show us notification, same email...
 const flash = require("express-flash");
+//used to log HTTP requests and errors
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
